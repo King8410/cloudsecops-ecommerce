@@ -360,6 +360,142 @@ nav a:hover {
   line-height: 1.5;
 }
 
+/* CART */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-panel {
+  width: 430px;
+  max-width: 95%;
+  height: 100%;
+  background: white;
+  padding: 28px;
+  overflow-y: auto;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.15);
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 20px;
+}
+
+.cart-header h2 {
+  font-size: 26px;
+}
+
+.close-cart {
+  border: none;
+  background: #f3f4f6;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.empty-cart div {
+  font-size: 55px;
+  margin-bottom: 20px;
+}
+
+.empty-cart h3 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+
+.empty-cart p {
+  color: #6b7280;
+}
+
+.cart-items {
+  padding: 20px 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.cart-item-icon {
+  width: 55px;
+  height: 55px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.cart-item-info span {
+  font-weight: 700;
+}
+
+.remove-btn {
+  border: none;
+  background: none;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cart-summary {
+  border-top: 2px solid #111827;
+  padding-top: 20px;
+}
+
+.cart-summary > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cart-summary span {
+  color: #6b7280;
+}
+
+.cart-summary strong {
+  font-size: 18px;
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #4f46e5;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+}
+
 /* FOOTER */
 
 footer {

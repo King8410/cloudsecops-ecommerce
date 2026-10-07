@@ -1,5 +1,6 @@
-import "./App.css";
 import { useState } from "react";
+import "./App.css";
+
 const products = [
   {
     id: 1,
@@ -33,12 +34,26 @@ const products = [
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
 
-const addToCart = (product) => {
-  setCart((currentCart) => [...currentCart, product]);
-};
+  const addToCart = (product) => {
+    setCart((currentCart) => [...currentCart, product]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart((currentCart) =>
+      currentCart.filter((_, itemIndex) => itemIndex !== index)
+    );
+  };
+
+  const cartTotal = cart.reduce(
+    (total, product) => total + product.price,
+    0
+  );
+
   return (
     <div className="app">
+      {/* NAVBAR */}
       <header className="navbar">
         <div className="logo">
           <span className="logo-icon">☁</span>
@@ -53,12 +68,17 @@ const addToCart = (product) => {
 
         <div className="nav-actions">
           <button className="login-btn">Login</button>
-          <button className="cart-btn">
-          🛒Cart ({cart.length})
+
+          <button
+            className="cart-btn"
+            onClick={() => setShowCart(!showCart)}
+          >
+            🛒 Cart ({cart.length})
           </button>
         </div>
       </header>
 
+      {/* HERO */}
       <main>
         <section className="hero" id="home">
           <div className="hero-content">
@@ -78,8 +98,27 @@ const addToCart = (product) => {
             </p>
 
             <div className="hero-buttons">
-              <button className="primary-btn">Shop Now →</button>
-              <button className="secondary-btn">Explore Products</button>
+              <button
+                className="primary-btn"
+                onClick={() =>
+                  document
+                    .getElementById("products")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Shop Now →
+              </button>
+
+              <button
+                className="secondary-btn"
+                onClick={() =>
+                  document
+                    .getElementById("products")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+              >
+                Explore Products
+              </button>
             </div>
 
             <div className="trust-row">
@@ -87,10 +126,12 @@ const addToCart = (product) => {
                 <strong>100%</strong>
                 <small>Secure Checkout</small>
               </div>
+
               <div>
                 <strong>24/7</strong>
                 <small>Security Monitoring</small>
               </div>
+
               <div>
                 <strong>99.9%</strong>
                 <small>Cloud Availability</small>
@@ -107,6 +148,7 @@ const addToCart = (product) => {
             <div className="shield">🛡️</div>
 
             <h3>CloudSecOps Protected</h3>
+
             <p>
               Continuous monitoring, secure CI/CD and automated security
               controls protect the application.
@@ -115,15 +157,18 @@ const addToCart = (product) => {
             <div className="security-check">
               <span>✓</span> Infrastructure Secure
             </div>
+
             <div className="security-check">
               <span>✓</span> Application Protected
             </div>
+
             <div className="security-check">
               <span>✓</span> Continuous Monitoring
             </div>
           </div>
         </section>
 
+        {/* PRODUCTS */}
         <section className="products-section" id="products">
           <div className="section-heading">
             <div>
@@ -141,11 +186,15 @@ const addToCart = (product) => {
 
                 <div className="product-info">
                   <span className="category">{product.category}</span>
+
                   <h3>{product.name}</h3>
 
                   <div className="product-bottom">
                     <strong>${product.price}</strong>
-                    <button onClick={() => addToCart(product)}>+</button>
+
+                    <button onClick={() => addToCart(product)}>
+                      +
+                    </button>
                   </div>
                 </div>
               </div>
@@ -153,10 +202,13 @@ const addToCart = (product) => {
           </div>
         </section>
 
+        {/* SECURITY */}
         <section className="security-section" id="security">
           <div>
             <span className="section-label">SECURITY FIRST</span>
+
             <h2>Built with security at every layer.</h2>
+
             <p>
               CloudCart will evolve into a complete DevSecOps and Cloud
               Security project with automated scanning, secure deployments,
@@ -186,6 +238,73 @@ const addToCart = (product) => {
         </section>
       </main>
 
+      {/* CART DRAWER */}
+      {showCart && (
+        <div className="cart-overlay">
+          <div className="cart-panel">
+            <div className="cart-header">
+              <h2>Your Cart</h2>
+
+              <button
+                className="close-cart"
+                onClick={() => setShowCart(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            {cart.length === 0 ? (
+              <div className="empty-cart">
+                <div>🛒</div>
+                <h3>Your cart is empty</h3>
+                <p>Add some products to get started.</p>
+              </div>
+            ) : (
+              <>
+                <div className="cart-items">
+                  {cart.map((product, index) => (
+                    <div className="cart-item" key={`${product.id}-${index}`}>
+                      <div className="cart-item-icon">
+                        {product.icon}
+                      </div>
+
+                      <div className="cart-item-info">
+                        <h3>{product.name}</h3>
+                        <span>${product.price}</span>
+                      </div>
+
+                      <button
+                        className="remove-btn"
+                        onClick={() => removeFromCart(index)}
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="cart-summary">
+                  <div>
+                    <span>Items</span>
+                    <strong>{cart.length}</strong>
+                  </div>
+
+                  <div>
+                    <span>Total</span>
+                    <strong>${cartTotal}</strong>
+                  </div>
+
+                  <button className="checkout-btn">
+                    Proceed to Checkout →
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* FOOTER */}
       <footer>
         <div className="logo">
           <span className="logo-icon">☁</span>
