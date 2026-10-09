@@ -45,7 +45,7 @@ jobs:
 
       - name: Scan Python and JavaScript code
         run: semgrep scan --config auto --error backend/ frontend/src/
-        dependency-scan:
+  dependency-scan:
     name: Dependency Scanning
     runs-on: ubuntu-latest
 
